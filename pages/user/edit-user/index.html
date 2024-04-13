@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>Edit User &mdash; Perpustakaan</title>
+
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="../../../assets/modules/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../assets/modules/fontawesome/css/all.min.css">
+
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="../../../assets/modules/jqvmap/dist/jqvmap.min.css">
+    <link rel="stylesheet" href="../../../assets/modules/weather-icon/css/weather-icons.min.css">
+    <link rel="stylesheet" href="../../../assets/modules/weather-icon/css/weather-icons-wind.min.css">
+    <link rel="stylesheet" href="../../../assets/modules/summernote/summernote-bs4.css">
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+    <link rel="stylesheet" href="../../../assets/css/components.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="main-wrapper main-wrapper-1">
+
+            <!-- NAVBAR -->
+            <div class="navbar-bg"></div>
+            <nav class="navbar navbar-expand-lg main-navbar">
+                <form class="form-inline mr-auto">
+                    <ul class="navbar-nav mr-3">
+                        <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i
+                                    class="fas fa-bars"></i></a></li>
+                    </ul>
+                </form>
+                <ul class="navbar-nav navbar-right">
+                    <li class="dropdown"><a href="#" data-toggle="dropdown"
+                            class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                            <div class="d-sm-none d-lg-inline-block">Hi, Ujang Maman</div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a href="../../auth/login/" class="dropdown-item has-icon text-danger">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- SIDEBAR -->
+            <<div class="main-sidebar sidebar-style-2">
+                <aside id="sidebar-wrapper">
+                    <div class="sidebar-brand">
+                        <a href="#">Perpus Online</a>
+                    </div>
+                    <div class="sidebar-brand sidebar-brand-sm">
+                        <a href="#">PO</a>
+                    </div>
+                    <ul class="sidebar-menu">
+                        <li class=""><a class="nav-link" href="../../dashboard"><i class="fas fa-home"></i>
+                                <span>Dashboard</span></a>
+                        </li>
+                        <li class="menu-header">Admin Menu</li>
+                        <li class="active"><a class="nav-link" href="../../user"><i class="fas fa-user"></i>
+                                <span>User</span></a>
+                        </li>
+                        <li class="menu-header">Officer Menu</li>
+                        <li class=""><a class="nav-link" href="../../book"><i class="fas fa-book"></i>
+                                <span>Book</span></a>
+                        </li>
+                        <li class=""><a class="nav-link" href="../../category"><i class="fas fa-list"></i>
+                                <span>Category</span></a></li>
+                        <li class="menu-header">Borrower Menu</li>
+                        <li class=""><a class="nav-link" href="../../book-list"><i class="fas fa-book"></i>
+                                <span>Book</span></a>
+                        </li>
+                        <li class=""><a class="nav-link" href="../../collect"><i class="fas fa-box"></i>
+                                <span>Collection</span></a></li>
+                    </ul>
+                </aside>
+            </div>
+
+            <!-- Main Content Laravel -->
+            <!-- <div class="main-content">
+                <section class="section">
+                    <div class="section-header">
+                        <h1>Edit User</h1>
+                        <div class="section-header-breadcrumb">
+                            <div class="breadcrumb-item active"><a href="{{ route('dashboard.view') }}">Home</a></div>
+                            <div class="breadcrumb-item">User</div>
+                        </div>
+                    </div>
+                    <div class="section-body">
+                        <h2 class="section-title">User</h2>
+                        <p class="section-lead">
+                            This page is just an example for you to create your own page.
+                        </p>
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Edit User Form</h4>
+                            </div>
+                            <div class="card-body">
+                                <form action="{{ route('user.update', $getUser->id) }}" method="POST">
+                                    @csrf
+                                    @method('PATCH')
+                                    <div class="row">
+                                        <div class="form-group col-md-6 col-12">
+                                            <label>Name<b class="text-danger">*</b></label>
+                                            <input type="text" class="form-control" value="{{ $getUser->name }}"
+                                                name="name" required>
+                                        </div>
+                                        <div class="form-group col-md-6 col-12">
+                                            <label>Username<b class="text-danger">*</b></label>
+                                            <input type="text" class="form-control" value="{{ $getUser->username }}"
+                                                name="username" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6 col-12">
+                                            <label>Email<b class="text-danger">*</b></label>
+                                            <input type="email" class="form-control" value="{{ $getUser->email }}"
+                                                name="email" required>
+                                        </div>
+                                        <div class="form-group col-md-6 col-12">
+                                            <label for="role">Role<b class="text-danger">*</b></label>
+                                            <select class="form-control form-select" name="role" id="role">
+                                                <option value="" disabled selected>Select Role</option>
+                                                <option value="officer" {{ $getUser->hasRole('officer') ? 'selected' :
+                                                    '' }}>officer
+                                                </option>
+                                                <option value="borrower" {{ $getUser->hasRole('borrower') ? 'selected' :
+                                                    '' }}>borrower
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address">Address<b class="text-danger">*</b></label>
+                                        <textarea class="form-control" name="address" id="address" cols="30"
+                                            rows="10">{{ $getUser->address }}</textarea>
+                                    </div>
+                                    <div class="d-flex">
+                                        <button type="submit" class="btn btn-success mr-1">Submit</button>
+                                        <button type="button" class="btn btn-primary mr-1" data-toggle="modal"
+                                            data-target="#changePasswordModal{{ $getUser->id }}">Change
+                                            Password</button>
+                                        <a href="{{ route('user.view') }}" class="btn btn-danger">Back</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="modal fade" id="changePasswordModal{{ $getUser->id }}" tabindex="-1" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Change Password</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{ route('user.update.password', $getUser->id) }}" method="POST">
+                                    @csrf
+                                    @method('PATCH')
+                                    <div class="form-group">
+                                        <label for="new_password">New Password</label>
+                                        <input type="password" class="form-control" name="new_password"
+                                            id="new_password" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <div class="main-content">
+                <section class="section">
+                    <div class="section-header">
+                        <h1>Edit User</h1>
+                        <div class="section-header-breadcrumb">
+                            <div class="breadcrumb-item active"><a href="{{ route('dashboard.view') }}">Home</a></div>
+                            <div class="breadcrumb-item">User</div>
+                        </div>
+                    </div>
+                    <div class="section-body">
+                        <h2 class="section-title">User</h2>
+                        <p class="section-lead">
+                            This page is just an example for you to create your own page.
+                        </p>
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Edit User Form</h4>
+                            </div>
+                            <div class="card-body">
+                                <form action="{{ route('user.update', $getUser->id) }}" method="POST">
+                                    <div class="row">
+                                        <div class="form-group col-md-6 col-12">
+                                            <label>Name<b class="text-danger">*</b></label>
+                                            <input type="text" class="form-control" value="Dwi"
+                                                name="name" required>
+                                        </div>
+                                        <div class="form-group col-md-6 col-12">
+                                            <label>Username<b class="text-danger">*</b></label>
+                                            <input type="text" class="form-control" value="dwi"
+                                                name="username" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6 col-12">
+                                            <label>Email<b class="text-danger">*</b></label>
+                                            <input type="email" class="form-control" value="dwi@gmail.com"
+                                                name="email" required>
+                                        </div>
+                                        <div class="form-group col-md-6 col-12">
+                                            <label for="role">Role<b class="text-danger">*</b></label>
+                                            <select class="form-control form-select" name="role" id="role">
+                                                <option value="" disabled>Select Role</option>
+                                                <option value="officer">officer</option>
+                                                <option value="borrower" selected>borrower</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address">Address<b class="text-danger">*</b></label>
+                                        <textarea class="form-control" name="address" id="address" cols="30"
+                                            rows="10">Bogor</textarea>
+                                    </div>
+                                    <div class="d-flex">
+                                        <button type="submit" class="btn btn-success mr-1">Submit</button>
+                                        <button type="button" class="btn btn-primary mr-1" data-toggle="modal"
+                                            data-target="#changePasswordModal1">Change
+                                            Password</button>
+                                        <a href="../../user" class="btn btn-danger">Back</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="modal fade" id="changePasswordModal1" tabindex="-1" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Change Password</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="" method="POST">
+                                    <div class="form-group">
+                                        <label for="new_password">New Password</label>
+                                        <input type="password" class="form-control" name="new_password"
+                                            id="new_password" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="main-footer">
+                <div class="footer-left">
+                    Copyright &copy; 2024 <div class="bullet"></div><a href="#">Perpustakaan</a>
+                </div>
+                <div class="footer-right">
+
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- General JS Scripts -->
+    <script src="../../../assets/modules/jquery.min.js"></script>
+    <script src="../../../assets/modules/popper.js"></script>
+    <script src="../../../assets/modules/tooltip.js"></script>
+    <script src="../../../assets/modules/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../../assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+    <script src="../../../assets/modules/moment.min.js"></script>
+    <script src="../../../assets/js/stisla.js"></script>
+
+    <!-- JS Libraies -->
+    <script src="../../../assets/modules/simple-weather/jquery.simpleWeather.min.js"></script>
+    <script src="../../../assets/modules/chart.min.js"></script>
+    <script src="../../../assets/modules/jqvmap/dist/jquery.vmap.min.js"></script>
+    <script src="../../../assets/modules/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="../../../assets/modules/summernote/summernote-bs4.js"></script>
+    <script src="../../../assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
+
+    <!-- Page Specific JS File -->
+    <script src="../../../assets/js/page/dashboard-general.js"></script>
+
+    <!-- Template JS File -->
+    <script src="../../../assets/js/scripts.js"></script>
+    <script src="../../../assets/js/custom.js"></script>
+</body>
+
+</html>
